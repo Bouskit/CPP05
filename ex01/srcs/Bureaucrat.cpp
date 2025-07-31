@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 // ─────────────────────────────────── CONSTRUCTORS ───────────────────────────────────
 
@@ -58,6 +59,15 @@ void Bureaucrat::decrementGrade() {
     if (_grade >= 150)
         throw GradeTooLowException();
     _grade++;
+}
+
+void Bureaucrat::signForm(Form& f) {
+    try {
+        f.beSigned(*this);
+        std::cout << "💼 " << getName() << " signed 📝 " << f.getName() << std::endl;
+    } catch (std::exception& e) {
+        std::cout << "💼 " << getName() << " couldn't sign 📝 " << f.getName() << " because " << e.what() << std::endl;
+    }
 }
 
 // ───────────────────────────────────── EXCEPTIONS ─────────────────────────────────────
